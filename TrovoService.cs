@@ -4,7 +4,7 @@
 ///   Email:        nuboheimer@yandex.ru
 ///----------------------------------------------------------------------------
  
-///   Version:      0.1.0
+///   Version:      0.1.1
 using System;
 using System.Collections.Generic;
 public class CPHInline
@@ -15,17 +15,17 @@ public class CPHInline
         if (!args.ContainsKey("users")) // защита от дурака с пустым аргументом списка пользователей.
             return false;
 
-        var currentViewers = (List<Dictionary<string, object>>)args["users"];
+        var currentViewers = (List<Dictionary<string, object>>)args["users"]; // запоминаем текущий список зрителей из аргумента бота.
 
         if (currentViewers.Count == 0)
             return true; // выходим, если список зрителей всё же пустой.
 
-        List<string> currentViewersNameList = new List<string>();
+        List<string> trovoPresentViewers = new List<string>(); // инициализируем переменную для списка ников зрителей.
 
         foreach (var viewer in currentViewers) // проходимся по зрителям в списке.
             {
-                currentViewersNameList.Add(viewer["userName"].ToString());
-                CPH.SetGlobalVar("currentTrovoViewersNameList", currentViewersNameList, true);
+                trovoPresentViewers.Add(viewer["userName"].ToString());
+                CPH.SetGlobalVar("trovoPresentViewers", trovoPresentViewers, false);
             }
 
         return true;
